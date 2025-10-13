@@ -1,12 +1,12 @@
-namespace Ucu.Poo.RoleplayGame;
-
-public class Knight : Character 
+namespace Ucu.Poo.RoleplayGame
 {
-    public Knight(string name) : base(name)
+    public class Knight : Character, ICharacter
     {
-        this.AddItem(new Sword());
-        this.AddItem(new Shield());
-        this.AddItem(new Armor());
+        public Knight(string name) : base(name)
+        {
+           
+             this.AddItem(new Sword());
+             this.AddItem(new Shield());
+        }
     }
 }
-
