@@ -5,4 +5,22 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Update="Characters\Archer.cs">
+      <DependentUpon>Character.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Characters\Dwarf.cs">
+      <DependentUpon>Character.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Characters\Knight.cs">
+      <DependentUpon>Character.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Characters\knightt.cs">
+      <DependentUpon>Character.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Characters\Wizard.cs">
+      <DependentUpon>Character.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>
