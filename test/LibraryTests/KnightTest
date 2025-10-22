@@ -1,0 +1,56 @@
+using NUnit.Framework;
+using Ucu.Poo.RoleplayGame;
+using System.Collections.Generic;
+
+namespace LibraryTests
+{
+    public class KnightTests
+    {
+        private Knight caballero;
+
+        [SetUp]
+        public void Setup()
+        {
+            caballero = new Knight("Lancelot");
+        }
+
+        [Test]
+        public void Caballero_PuedeAgregarItemNoMagico()
+        {
+            IItem espada = new Sword(); 
+            caballero.AddItem(espada);
+            Assert.That(caballero.AttackValue, Is.EqualTo(espada.AttackValue));
+            Assert.That(caballero.DefenseValue, Is.EqualTo(espada.DefenseValue));
+        }
+
+        [Test]
+        public void Caballero_NoPuedeAgregarItemMagico()
+        {
+            IItem libroHechizos = new SpellsBook(); 
+            caballero.AddItem(libroHechizos);
+            
+            Assert.That(caballero.AttackValue, Is.EqualTo(0));
+            Assert.That(caballero.DefenseValue, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void Caballero_RecibeAtaqueYReduceSalud()
+        {
+            int saludInicial = caballero.Health;
+            caballero.ReceiveAttack(40);
+
+            Assert.That(caballero.Health, Is.LessThan(saludInicial));
+        }
+
+        [Test]
+        public void Caballero_PuedeCurarse()
+        {
+            caballero.ReceiveAttack(30);
+            int saludTrasAtaque = caballero.Health;
+            caballero.Cure();
+
+            Assert.That(caballero.Health, Is.EqualTo(100));
+            Assert.That(caballero.Health, Is.GreaterThan(saludTrasAtaque));
+        }
+    }
+}
