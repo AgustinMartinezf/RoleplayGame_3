@@ -1,0 +1,58 @@
+using NUnit.Framework;
+using Ucu.Poo.RoleplayGame;
+using System.Collections.Generic;
+
+namespace LibraryTests
+{
+    public class WizardTests
+    {
+        private Wizard mago;
+
+        [SetUp]
+        public void Setup()
+        {
+            mago = new Wizard("Merlin");
+        }
+
+        [Test]
+        public void Mago_PuedeAgregarItemMagico()
+        {
+            IItem baston = new Staff(); 
+            mago.AddItem(baston);
+
+            
+            Assert.That(mago.AttackValue, Is.EqualTo(baston.AttackValue));
+            Assert.That(mago.DefenseValue, Is.EqualTo(baston.DefenseValue));
+        }
+
+        [Test]
+        public void Mago_PuedeAgregarItemNoMagico()
+        {
+            IItem casco = new Helmet(); 
+            mago.AddItem(casco);
+
+            Assert.That(mago.AttackValue, Is.EqualTo(casco.AttackValue));
+            Assert.That(mago.DefenseValue, Is.EqualTo(casco.DefenseValue));
+        }
+
+        [Test]
+        public void Mago_RecibeAtaqueYReduceSalud()
+        {
+            int saludInicial = mago.Health;
+            mago.ReceiveAttack(45);
+
+            Assert.That(mago.Health, Is.LessThan(saludInicial));
+        }
+
+        [Test]
+        public void Mago_PuedeCurarse()
+        {
+            mago.ReceiveAttack(30);
+            int saludTrasAtaque = mago.Health;
+            mago.Cure();
+
+            Assert.That(mago.Health, Is.EqualTo(100));
+            Assert.That(mago.Health, Is.GreaterThan(saludTrasAtaque));
+        }
+    }
+}
