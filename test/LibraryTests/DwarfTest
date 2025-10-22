@@ -1,0 +1,56 @@
+using NUnit.Framework;
+using Ucu.Poo.RoleplayGame;
+using System.Collections.Generic;
+
+namespace LibraryTests
+{
+    public class DwarfTests
+    {
+        private Dwarf enano;
+
+        [SetUp]
+        public void Setup()
+        {
+            enano = new Dwarf("Gimli");
+        }
+
+        [Test]
+        public void Enano_PuedeAgregarItemNoMagico()
+        {
+            IItem hacha = new Axe(); 
+            enano.AddItem(hacha);
+            
+            Assert.That(enano.AttackValue, Is.EqualTo(hacha.AttackValue));
+            Assert.That(enano.DefenseValue, Is.EqualTo(hacha.DefenseValue));
+        }
+
+        [Test]
+        public void Enano_NoPuedeAgregarItemMagico()
+        {
+            IItem libroHechizos = new SpellsBook(); 
+            enano.AddItem(libroHechizos);
+            Assert.That(enano.AttackValue, Is.EqualTo(0));
+            Assert.That(enano.DefenseValue, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void Enano_RecibeAtaqueYReduceSalud()
+        {
+            int saludInicial = enano.Health;
+            enano.ReceiveAttack(50); 
+
+            Assert.That(enano.Health, Is.LessThan(saludInicial));
+        }
+
+        [Test]
+        public void Enano_PuedeCurarse()
+        {
+            enano.ReceiveAttack(30);
+            int saludTrasAtaque = enano.Health;
+            enano.Cure();
+
+            Assert.That(enano.Health, Is.EqualTo(100));
+            Assert.That(enano.Health, Is.GreaterThan(saludTrasAtaque));
+        }
+    }
+}
