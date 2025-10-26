@@ -52,10 +52,15 @@ public abstract class Character : ICharacter
 
     public virtual void ReceiveAttack(int power)
     {
-        if (this.DefenseValue < power)
-        {
-            this.Health -= power - this.DefenseValue;
-        }
+        int damage = power - this.DefenseValue;
+
+        if (damage <= 0)
+            damage = 1; // evita estancamientos
+
+        this.Health -= damage;
+
+        if (this.Health < 0)
+            this.Health = 0;
     }
 
     public virtual void Cure()
