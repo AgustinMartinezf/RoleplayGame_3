@@ -19,14 +19,17 @@ namespace LibraryTests
             Assert.That(caballero.AttackValue, Is.GreaterThan(0));
             Assert.That(caballero.DefenseValue, Is.GreaterThan(0));
         }
-
+        
         [Test]
-        public void Caballero_NoPierdeVidaSiElAtaqueNoSuperaLaDefensa()
+        public void Caballero_PierdeVidaMinimaSiElAtaqueNoSuperaLaDefensa()
         {
             int saludInicial = caballero.Health;
             caballero.ReceiveAttack(caballero.DefenseValue - 10);
-            Assert.That(caballero.Health, Is.EqualTo(saludInicial));
+
+            // Debería perder exactamente 1 punto por el daño mínimo garantizado
+            Assert.That(caballero.Health, Is.EqualTo(saludInicial - 1));
         }
+
 
         [Test]
         public void Caballero_PierdeVidaSiAtaqueSuperaDefensa()
