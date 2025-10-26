@@ -22,8 +22,7 @@ namespace LibraryTests
         [Test]
         public void Troll_TieneEstadisticasInicialesValidadas()
         {
-            // Variante de nombre y de intención respecto a los tests del Goblin:
-            // comprobamos que ataque y defensa iniciales son positivos.
+          
             Assert.That(troll.AttackValue, Is.GreaterThan(0), "El valor de ataque debe ser mayor que 0");
             Assert.That(troll.DefenseValue, Is.GreaterThan(0), "El valor de defensa debe ser mayor que 0");
         }
@@ -31,8 +30,7 @@ namespace LibraryTests
         [Test]
         public void Troll_DefensaReduceElDanoRecibido()
         {
-            // Comprobamos que la cantidad de vida perdida es menor que el daño bruto,
-            // lo que indica que la defensa está mitigando parte del ataque.
+     
             int vidaInicial = troll.Health;
             int dano = 30;
             troll.ReceiveAttack(dano);
@@ -45,7 +43,7 @@ namespace LibraryTests
         [Test]
         public void Troll_Cure_RestauraVidaAlMaximo()
         {
-            // Golpeamos, luego curamos y esperamos la salud completa (100).
+        
             troll.ReceiveAttack(50);
             int vidaTrasAtaque = troll.Health;
             Assert.That(vidaTrasAtaque, Is.LessThan(100), "Tras el ataque la vida debe ser menor que la máxima");
