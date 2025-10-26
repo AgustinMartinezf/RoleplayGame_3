@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using Ucu.Poo.RoleplayGame;
 
-namespace LibraryTests
+namespace  Ucu.Poo.RoleplayGame.Tests
 {
     [TestFixture]
     public class VillainArcherTests
