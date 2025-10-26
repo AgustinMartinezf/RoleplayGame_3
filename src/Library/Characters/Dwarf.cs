@@ -1,6 +1,6 @@
 namespace Ucu.Poo.RoleplayGame;
 
-public class Dwarf : Character 
+public class Dwarf : ICharacter 
 {
     public Dwarf(string name) : base(name)
     {
