@@ -31,7 +31,7 @@ namespace LibraryTests
         {
             int dano = 200; // daño mayor que la vida
             ogre.ReceiveAttack(dano);
-            Assert.That(ogre.Health, Is.GreaterThanOrEqualTo(0));
+            Assert.That(ogre.Health, Is.EqualTo(0));
         }
 
         [Test]
@@ -45,4 +45,5 @@ namespace LibraryTests
             Assert.That(ogre.Health, Is.EqualTo(100));
             Assert.That(ogre.Health, Is.GreaterThan(vidaTrasAtaque));
         }
+
     }
