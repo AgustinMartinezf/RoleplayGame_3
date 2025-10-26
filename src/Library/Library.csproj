@@ -27,6 +27,9 @@
     <Compile Update="Characters\Goblin.cs">
       <DependentUpon>Enemy.cs</DependentUpon>
     </Compile>
+    <Compile Update="Characters\Troll.cs">
+      <DependentUpon>Enemy.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>
