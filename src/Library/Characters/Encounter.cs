@@ -1,18 +1,47 @@
-namespace Ucu.Poo.RoleplayGame
+using System.Collections.Generic;
+
+namespace Ucu.Poo.RoleplayGame;
+
+public class Encounter
 {
-    public class Encounter
+    private List<Hero> heroes;
+    private List<Enemy> enemies;
+
+    public Encounter(List<Hero> heroes, List<Enemy> enemies)
     {
-        public void DoEncounter(Hero hero, Enemy enemy)  // Ya recibe hero y enemy como parametro de la función, no es necesario un constructor
+        this.heroes = heroes;
+        this.enemies = enemies;
+    }
+
+    public void DoEncounter()
+    {
+        while (heroes.Exists(h => h.Health > 0) && enemies.Exists(e => e.Health > 0))
         {
-            while (hero.Health > 0 && enemy.Health > 0)  // Mientras que el héroe y el enemigo sigan con vida...
+            // Enemigos atacan primero
+            for (int i = 0; i < enemies.Count; i++)
             {
-                enemy.ReceiveAttack(hero.AttackValue);  // El enemigo ataca al héroe
-                if (enemy.Health == 0)  
+                var enemy = enemies[i];
+                if (enemy.Health <= 0) continue;
+
+                var hero = heroes[i % heroes.Count];
+                if (hero.Health > 0)
+                    hero.ReceiveAttack(enemy.AttackValue);
+            }
+
+            // Héroes atacan
+            foreach (var hero in heroes)
+            {
+                if (hero.Health <= 0) continue;
+
+                foreach (var enemy in enemies)
                 {
-                    hero.AddVictoryPoints(enemy.VictoryPoints);  // Si el héroe vence al enemigo, este obtiene sus VP
-                    break; 
+                    if (enemy.Health <= 0) continue;
+
+                    enemy.ReceiveAttack(hero.AttackValue);
+
+                    if (enemy.Health == 0)
+                        hero.AddVictoryPoints(enemy.VictoryValue);
                 }
-                hero.ReceiveAttack(enemy.AttackValue);  // El héroe ataca al enemigo 
             }
         }
     }

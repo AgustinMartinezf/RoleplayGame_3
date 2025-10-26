@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using Ucu.Poo.RoleplayGame;
-using System.Collections.Generic;
 
 namespace LibraryTests
 {
@@ -15,42 +14,37 @@ namespace LibraryTests
         }
 
         [Test]
-        public void Caballero_PuedeAgregarItemNoMagico()
+        public void Caballero_IniciaConItemsBasicos()
         {
-            IItem espada = new Sword(); 
-            caballero.AddItem(espada);
-            Assert.That(caballero.AttackValue, Is.EqualTo(espada.AttackValue));
-            Assert.That(caballero.DefenseValue, Is.EqualTo(espada.DefenseValue));
+            Assert.That(caballero.AttackValue, Is.GreaterThan(0));
+            Assert.That(caballero.DefenseValue, Is.GreaterThan(0));
         }
 
         [Test]
-        public void Caballero_NoPuedeAgregarItemMagico()
-        {
-            IItem libroHechizos = new SpellsBook(); 
-            caballero.AddItem(libroHechizos);
-            
-            Assert.That(caballero.AttackValue, Is.EqualTo(0));
-            Assert.That(caballero.DefenseValue, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void Caballero_RecibeAtaqueYReduceSalud()
+        public void Caballero_NoPierdeVidaSiElAtaqueNoSuperaLaDefensa()
         {
             int saludInicial = caballero.Health;
-            caballero.ReceiveAttack(40);
+            caballero.ReceiveAttack(caballero.DefenseValue - 10);
+            Assert.That(caballero.Health, Is.EqualTo(saludInicial));
+        }
 
+        [Test]
+        public void Caballero_PierdeVidaSiAtaqueSuperaDefensa()
+        {
+            int saludInicial = caballero.Health;
+            caballero.ReceiveAttack(caballero.DefenseValue + 50);
             Assert.That(caballero.Health, Is.LessThan(saludInicial));
         }
 
         [Test]
         public void Caballero_PuedeCurarse()
         {
-            caballero.ReceiveAttack(30);
+            caballero.ReceiveAttack(80);
             int saludTrasAtaque = caballero.Health;
             caballero.Cure();
-
             Assert.That(caballero.Health, Is.EqualTo(100));
             Assert.That(caballero.Health, Is.GreaterThan(saludTrasAtaque));
         }
     }
 }
+

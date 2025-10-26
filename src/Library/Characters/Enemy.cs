@@ -2,11 +2,11 @@ namespace Ucu.Poo.RoleplayGame
 {
     public class Enemy : Character  // Enemy hereda de character 
     {
-        public int VictoryPoints { get; set; }
+        public int VictoryValue { get; protected set; }
 
-        public Enemy(string name, int victorypoints) : base(name)  // Inicializo el constructor 
+        public Enemy(string name, int victoryValue) : base(name)  // Inicializo el constructor 
         {
-            this.VictoryPoints = victorypoints;
+            this.VictoryValue = victoryValue;
         }
     }
 }
