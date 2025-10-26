@@ -45,5 +45,5 @@ namespace LibraryTests
             Assert.That(ogre.Health, Is.EqualTo(100));
             Assert.That(ogre.Health, Is.GreaterThan(vidaTrasAtaque));
         }
-
     }
+}
